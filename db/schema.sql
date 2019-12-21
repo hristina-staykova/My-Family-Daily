@@ -1,5 +1,25 @@
-###
-Schema
+DROP DATABASE IF EXISTS family_db;
 
-CREATE DATABASE ;
-USE ;
+CREATE DATABASE family_db;
+
+USE family_db;
+
+CREATE TABLE users (
+  user_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  email VARCHAR(150) NOT NULL UNIQUE,
+  user_password VARCHAR(30) NOT NULL,
+  is_admin BOOLEAN NOT NULL DEFAULT false
+);
+
+CREATE TABLE news (
+  news_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  content VARCHAR(1000) NOT NULL,
+  user_id INT NOT NULL
+);
+
+CREATE TABLE comments (
+  comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  content VARCHAR(1000) NOT NULL,
+  user_id INT NOT NULL,
+  news_id INT NOT NULL
+);
