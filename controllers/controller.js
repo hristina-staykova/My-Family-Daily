@@ -1,3 +1,4 @@
+// all routes to be put here
 var express = require("express");
 
 var router = express.Router();
