@@ -14,7 +14,7 @@ CREATE TABLE users (
 CREATE TABLE news (
   news_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   content VARCHAR(1000) NOT NULL,
-  user_id INT NOT NULL
+  user_id INT NOT NULL,
   createdOn DATETIME NOT NULL DEFAULT NOW()
 );
 
@@ -22,6 +22,6 @@ CREATE TABLE comments (
   comment_id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
   content VARCHAR(1000) NOT NULL,
   user_id INT NOT NULL,
-  news_id INT NOT NULL
+  news_id INT NOT NULL,
   createdOn DATETIME NOT NULL DEFAULT NOW()
 );
