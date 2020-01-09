@@ -1,6 +1,21 @@
 // Import MySQL connection.
 var connection = require("../config/connection.js");
 
+// Helper function for SQL syntax.
+// Let's say we want to pass 3 values into the mySQL query.
+// In order to write the query, we need 3 question marks.
+// The above helper function loops through and creates an array of question marks - ["?", "?", "?"] - and turns it into a string.
+// ["?", "?", "?"].toString() => "?,?,?";
+function printQuestionMarks(num) {
+  var arr = [];
+
+  for (var i = 0; i < num; i++) {
+    arr.push("?");
+  }
+
+  return arr.toString();
+}
+
 // Helper function to convert object key/value pairs to SQL syntax
 function objToSql(ob) {
   var arr = [];
@@ -26,14 +41,8 @@ function objToSql(ob) {
 
 // Object for all our SQL statement functions.
 var orm = {
-  selectRecentNews: function(cb) {
-    var queryString = `
-    SELECT * FROM
-    (SELECT * FROM news
-    ORDER BY news.createdOn DESC
-    LIMIT 10) AS recent_news
-    LEFT OUTER JOIN comments ON recent_news.news_id = comments.news_id
-    ORDER BY recent_news.createdOn DESC`;
+  selectAll: function(tableInput, cb) {
+    var queryString = "SELECT * FROM " + tableInput + ";";
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -41,8 +50,10 @@ var orm = {
       cb(result);
     });
   },
-  selectUsers: function(cb) {
-    var queryString = "SELECT * FROM users";
+  select: function(table, condition, cb) {
+    var queryString = "SELECT * FROM " + table;
+    queryString += " WHERE ";
+    queryString += condition;
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
@@ -50,110 +61,62 @@ var orm = {
       cb(result);
     });
   },
-  selectComments: function(cb) {
-    var queryString = "SELECT * FROM comments";
+  insert: function(table, cols, vals, cb) {
+    var queryString = "INSERT INTO " + table;
+
+    queryString += " (";
+    queryString += cols.toString();
+    queryString += ") ";
+    queryString += "VALUES (";
+    queryString += printQuestionMarks(vals.length);
+    queryString += ") ";
+
+    console.log(queryString);
+
+    connection.query(queryString, vals, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
+      cb(result);
+    });
+  },
+  delete: function(table, condition, cb) {
+    var queryString = "DELETE FROM " + table;
+    queryString += " WHERE ";
+    queryString += condition;
+
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
+
       cb(result);
     });
   },
-  selectNews: function(cb) {
-    var queryString = "SELECT * FROM news";
-    connection.query(queryString, function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  selectUser: function(user, cb) {
-    var queryString = "SELECT * FROM users WHERE email = ?";
-    connection.query(queryString, [user.email], function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  insertUser: function(user, cb) {
-    var queryString = "INSERT INTO users (email, user_password) VALUES (?,?)";
-    connection.query(queryString, [user.email, user.password], function(
-      err,
-      result
-    ) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  insertNews: function(news, user_id, cb) {
-    var queryString = "INSERT INTO news (content, user_id) VALUES (?,?)";
-    connection.query(queryString, [news.content, user_id], function(
-      err,
-      result
-    ) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  insertComment: function(comment, user_id, news_id, cb) {
-    var queryString =
-      "INSERT INTO comments (content, user_id, news_id) VALUES (?,?,?)";
-    connection.query(queryString, [comment.content, user_id, news_id], function(
-      err,
-      result
-    ) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  deleteUser: function(user_id, cb) {
-    var queryString = "DELETE FROM users WHERE user_id =?";
-    connection.query(queryString, [user_id], function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  deleteComment: function(comment_id, cb) {
-    var queryString = "DELETE FROM comments WHERE comment_id =?";
-    connection.query(queryString, [comment_id], function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  deleteNews: function(news_id, cb) {
-    var queryString = `
-    DELETE news, comments
-    FROM news
-    INNER JOIN comments ON news.news_id = comments.news_id
-    WHERE news.news_id = ?`;
-    connection.query(queryString, [news_id], function(err, result) {
-      if (err) {
-        throw err;
-      }
-      cb(result);
-    });
-  },
-  updateUser: function(objColVals, user_id, cb) {
-    var queryString = "UPDATE users SET ";
+  update: function(table, objColVals, condition, cb) {
+    var queryString = "UPDATE " + table;
+
+    queryString += " SET ";
     queryString += objToSql(objColVals);
-    queryString += " WHERE user_id = ";
-    queryString += user_id;
+    queryString += " WHERE ";
+    queryString += condition;
+
+    console.log(queryString);
     connection.query(queryString, function(err, result) {
       if (err) {
         throw err;
       }
+
+      cb(result);
+    });
+  },
+  execute: function(queryString, cb) {
+    connection.query(queryString, function(err, result) {
+      if (err) {
+        throw err;
+      }
+
       cb(result);
     });
   }
