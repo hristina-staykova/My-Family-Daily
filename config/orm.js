@@ -122,5 +122,5 @@ var orm = {
   }
 };
 
-// Export the orm object for the model (model.js).
+// Export the orm object for the controller (controller.js).
 module.exports = orm;
