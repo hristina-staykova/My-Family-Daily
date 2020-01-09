@@ -1,7 +1,7 @@
 // all routes to be put here
 var express = require("express");
 var router = express.Router();
-var orm = require("../controllers/controller.js");
+var orm = require("../config/orm.js");
 
 // Create all our routes and set up logic within those routes where required.
 //on "/" we see the login page
