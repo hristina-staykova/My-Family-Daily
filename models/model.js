@@ -3,5 +3,5 @@ var orm = require("../config/orm.js");
 
 var ormObject = {};
 
-// Export the database functions for the controller (catsController.js).
+// Export the database functions for the controller (controller.js).
 module.exports = ormObject;
