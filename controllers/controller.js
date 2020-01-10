@@ -39,7 +39,7 @@ router.get("/admin/comments", function(req, res) {
   });
 });
 
-//admin page - delete user from the db and display the new table - OK
+//admin page - delete user from the db - OK
 router.delete("/admin/users/:id", function(req, res) {
   var user_id = req.params.id;
   user.deleteUser(user_id, function(result) {
@@ -57,20 +57,56 @@ router.delete("/admin/comments/:id", function(req, res) {
   });
 });
 
-//admin page - update/edit user by id from the db
+//admin page - update/edit user by id from the db - OK
 router.put("/admin/users/:id", function(req, res) {
   var user_id = req.params.id;
-  user.updateUser(objColVals, user_id, cb);
-  res.render("admin");
+  var objColVals = {};
+  if (req.body.user_password != null) {
+    objColVals["user_password"] = req.body.user_password;
+  }
+  if (req.body.is_admin != null) {
+    objColVals["is_admin"] = req.body.is_admin;
+  }
+  user.updateUser(objColVals, user_id, function(comments) {
+    console.log(comments);
+    res.end();
+  });
 });
 
-//admin page - delete news by id from the db + its comments - working
-router.get("/admin/news/:id", function(req, res) {
+//admin page - delete news by id from the db + its comments - OK
+router.delete("/admin/news/:id", function(req, res) {
   var news_id = req.params.id;
   news.deleteNews(news_id, function(news) {
     console.log(news);
+    res.end();
   });
-  //res.render("admin", {news}); - what do we render after deleting news + its comments?
+});
+
+//adding new news - OK
+router.post("/api/news", function(req, res) {
+  //check the request - the news content and the logged user id
+  news.insertNews(
+    ["content", "user_id"],
+    [req.body.content, req.body.user_id],
+    function(result) {
+      res.json({ id: result.insertId });
+      //we display the new news entry as a first entry?
+      // res.render("index");
+    }
+  );
+});
+
+//adding a comment to news - OK
+router.post("/api/comments", function(req, res) {
+  //check the request - the content and the logged user_id and the news_id
+  comment.insertComment(
+    ["content", "user_id", "news_id"],
+    [req.body.content, req.body.user_id, req.body.news_id],
+    function(result) {
+      res.json({ id: result.insertId });
+      // res.render("index");
+    }
+  );
 });
 
 //on "/" we see the login page
@@ -78,12 +114,12 @@ router.get("/", function(req, res) {
   res.render("login");
 });
 
-//"index" is the main page after login/sign up
+//"index" is the main page after login/sign up - not fully working
 router.get("/index", function(req, res) {
-  news.selectRecentNews(function() {
+  news.selectRecentNews(function(recentNews) {
     console.log(recentNews);
+    res.render("index", { recentNews });
   });
-  res.render("index");
 });
 
 router.get("/signup", function(req, res) {
@@ -107,27 +143,6 @@ router.post("/api/signup", function(req, res) {
   //check the request - how do we pass the email & password in insertUser(), check if the user exists - selectUser()
   user.insertUser(req.body.user, cb);
   //what do we render on signup - main page?
-  res.render("index");
-});
-
-//adding new news
-router.post("/api/news", function(req, res) {
-  //check the request - how do we pass the data (req.body?) - the news content and the logged user id
-  news.insertNews(
-    ["content", "user_id"],
-    [req.body.content, req.body.user_id],
-    function(result) {
-      res.json({ id: result.insertId });
-      //we display the new news entry as a first entry?
-      // res.render("index");
-    }
-  );
-});
-
-//adding a comment to news
-router.post("/api/comments", function(req, res) {
-  //check the request - how do we pass the data (req.body?) - the comment content and the logged user id
-  comment.insertComment(comment, user_id, news_id, cb);
   res.render("index");
 });
 
