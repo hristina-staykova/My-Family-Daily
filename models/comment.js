@@ -11,7 +11,8 @@ var comment = {
       cb(res);
     });
   },
-  deleteComment: function(condition, cb) {
+  deleteComment: function(comment_id, cb) {
+    var condition = "comment_id = " + comment_id;
     orm.delete("comments", condition, function(res) {
       cb(res);
     });

@@ -21,7 +21,8 @@ var user = {
       cb(res);
     });
   },
-  deleteUser: function(condition, cb) {
+  deleteUser: function(user_id, cb) {
+    var condition = "user_id = " + user_id;
     orm.delete("users", condition, function(res) {
       cb(res);
     });
