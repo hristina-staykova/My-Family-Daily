@@ -6,6 +6,11 @@ var comment = {
       cb(res);
     });
   },
+  selectNewsComments: function(condition, cb) {
+    orm.select("comments", condition, function(res) {
+      cb(res);
+    });
+  },
   insertComment: function(cols, vals, cb) {
     orm.insert("comments", cols, vals, function(res) {
       cb(res);
