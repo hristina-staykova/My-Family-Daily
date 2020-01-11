@@ -61,6 +61,26 @@ var orm = {
       cb(result);
     });
   },
+  selectAndLimit: function(
+    table,
+    howMany,
+    cb,
+    colToOrder = "createdOn",
+    dir = "DESC"
+  ) {
+    var queryString = `SELECT * FROM ?? ORDER BY ?? ${
+      dir === "DESC" ? "DESC" : "ASC"
+    } LIMIT ?`;
+    console.log(queryString);
+    connection.query(queryString, [table, colToOrder, howMany], function(
+      err,
+      result
+    ) {
+      if (err) throw err;
+      cb(result);
+    });
+  },
+
   insert: function(table, cols, vals, cb) {
     var queryString = "INSERT INTO " + table;
 
