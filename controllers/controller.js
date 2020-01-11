@@ -116,8 +116,8 @@ router.get("/", function(req, res) {
 
 //"index" is the main page after login/sign up - to be continued
 router.get("/index", function(req, res) {
-  news.selectRecentNews(function(recentNews) {
-    console.log(recentNews);
+  news.selectRecentNews(10, function(recentNews) {
+    console.log("latestNews array", recentNews);
     res.render("index", { recentNews });
   });
 });
