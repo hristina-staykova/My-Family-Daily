@@ -1,1 +1,26 @@
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Montserrat", sans-serif;
+  font-weight: bolder;
+  font-size: larger;
+}
 
+body {
+  font-family: "Merriweather", serif;
+}
+
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  text-align: center;
+}
+
+.columns {
+  padding-top: 10px;
+}

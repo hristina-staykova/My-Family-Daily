@@ -114,7 +114,7 @@ router.get("/", function(req, res) {
   res.render("login");
 });
 
-//"index" is the main page after login/sign up - not fully working
+//"index" is the main page after login/sign up - to be continued
 router.get("/index", function(req, res) {
   news.selectRecentNews(function(recentNews) {
     console.log(recentNews);
