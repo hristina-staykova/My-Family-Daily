@@ -6,9 +6,15 @@ var user = {
       cb(res);
     });
   },
+<<<<<<< HEAD
   selectUser: function (user_id, cb) {
     var condition = "user_id = " + user_id;
     orm.select("users", condition, function (res) {
+=======
+  selectUser: function(user_id, cb) {
+    var condition = "user_id = " + user_id;
+    orm.select("users", condition, function(res) {
+>>>>>>> a01c139e67ef811be0659a363235fd72abaf46a6
       cb(res[0]);
     });
   },

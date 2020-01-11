@@ -109,6 +109,7 @@ router.post("/api/comments", function (req, res) {
   );
 });
 
+<<<<<<< HEAD
 //on "/" we see the login page
 router.get("/", function (req, res) {
   res.render("login");
@@ -133,6 +134,34 @@ router.get("/login", function (req, res) {
 });
 
 router.post("/api/login", function (req, res) {
+=======
+//on "/" we see the login page - OK
+router.get("/", function(req, res) {
+  res.render("login");
+});
+
+//OK
+router.get("/signup", function(req, res) {
+  res.render("signup");
+});
+
+//OK
+router.get("/login", function(req, res) {
+  res.render("login");
+});
+
+//"index" is the main page after login/sign up - to be continued
+router.get("/index", function(req, res) {
+  news.selectRecentNews(10, function(recentNews) {
+    user.selectUser(1, function(user) {
+      console.log({ recentNews, user });
+      res.render("index", { recentNews, user });
+    });
+  });
+});
+
+router.post("/api/login", function(req, res) {
+>>>>>>> a01c139e67ef811be0659a363235fd72abaf46a6
   //selectUser()
   //- if user exists
   //- if password is correct
