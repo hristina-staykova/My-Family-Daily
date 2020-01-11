@@ -1,1 +1,83 @@
-this is home
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Family News Report</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Merriweather|Montserrat&display=swap&subset=cyrillic,cyrillic-ext"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="style.css" />
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+</head>
+
+<body>
+    <section class="hero is-small is-light is-bold">
+        <div class="hero-body">
+            <nav class="navbar" role="navigation">
+                <div class="navbar-brand has-icons-right">
+                    <h1 class="navbar-item">Family Daily</h1>
+                    <div class="buttons">
+                        <button class="button is-primary">Primary</button>
+                        <button class="button is-danger">Link</button>
+                    </div>
+                </div>
+            </nav>
+        </div>
+    </section>
+    <section>
+        <div class="container has-text-justified">
+            <div class="columns">
+                <div class="column is-three-quarters">
+                    <article class="message">
+                        <div class="message-header">
+                            <p>Normal message</p>
+                            <button class="delete" aria-label="delete"></button>
+                        </div>
+                        <div class="message-body">
+                            Lorem ipsum dolor sit amet, consectetur adipiscing elit. <strong>Pellentesque risus
+                                mi</strong>, tempus quis placerat ut, porta nec nulla.Nullam gravida purus diam, et
+                            dictum <a>felis venenatis</a> efficitur. Aenean ac <em>eleifend lacus</em>, in mollis
+                            lectus.
+                        </div>
+                        <div class="control">
+                            <div class="control">
+                                <textarea class="textarea" placeholder="Comment 1" disabled></textarea>
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <p class="control is-expanded">
+                                <input class="input" type="text" placeholder="Add a comment">
+                            </p>
+                            <p class="control">
+                                <a class="button is-info">
+                                    Submit
+                                </a>
+                            </p>
+                        </div>
+                </div>
+                </article>
+                <div class="column">
+                    <div class="tile is-ancestor">
+                        <div class="tile is-vertical is-parent">
+                            <div class="tile is-child box">
+                                <p>Current time in ..city..</p>
+                            </div>
+                            <div class="tile is-child box">
+                                <p>Current weather in ..city..</p>
+                            </div>
+                            <button class="button is-primary is-rounded">Invite your family! :)</button>
+                        </div>
+                    </div>
+                </div>
+    </section>
+    <footer class="footer">
+        <div class="content has-text-centered">
+            <p>Fixed Footer</p>
+        </div>
+    </footer>
+</body>
+
+</html>
