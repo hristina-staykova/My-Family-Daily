@@ -1,31 +1,31 @@
 var orm = require("../config/orm.js");
 
 var user = {
-  selectAllUsers: function(cb) {
-    orm.selectAll("users", function(res) {
+  selectAllUsers: function (cb) {
+    orm.selectAll("users", function (res) {
       cb(res);
     });
   },
-  selectUser: function(user_id, cb) {
+  selectUser: function (user_id, cb) {
     var condition = "user_id = " + user_id;
-    orm.select("users", condition, function(res) {
+    orm.select("users", condition, function (res) {
       cb(res[0]);
     });
   },
-  insertUser: function(cols, vals, cb) {
-    orm.insert("users", cols, vals, function(res) {
+  insertUser: function (cols, vals, cb) {
+    orm.insert("users", cols, vals, function (res) {
       cb(res);
     });
   },
-  updateUser: function(objColVals, user_id, cb) {
+  updateUser: function (objColVals, user_id, cb) {
     var condition = "user_id = " + user_id;
-    orm.update("users", objColVals, condition, function(res) {
+    orm.update("users", objColVals, condition, function (res) {
       cb(res);
     });
   },
-  deleteUser: function(user_id, cb) {
+  deleteUser: function (user_id, cb) {
     var condition = "user_id = " + user_id;
-    orm.delete("users", condition, function(res) {
+    orm.delete("users", condition, function (res) {
       cb(res);
     });
   }
