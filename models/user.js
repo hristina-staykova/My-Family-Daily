@@ -6,9 +6,10 @@ var user = {
       cb(res);
     });
   },
-  selectUser: function(condition, cb) {
+  selectUser: function(user_id, cb) {
+    var condition = "user_id =" + user_id;
     orm.select("users", condition, function(res) {
-      cb(res);
+      cb(res[0]);
     });
   },
   insertUser: function(cols, vals, cb) {
