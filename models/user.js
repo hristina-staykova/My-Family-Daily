@@ -16,12 +16,14 @@ var user = {
       cb(res);
     });
   },
-  updateUser: function(objColVals, condition, cb) {
+  updateUser: function(objColVals, user_id, cb) {
+    var condition = "user_id = " + user_id;
     orm.update("users", objColVals, condition, function(res) {
       cb(res);
     });
   },
-  deleteUser: function(condition, cb) {
+  deleteUser: function(user_id, cb) {
+    var condition = "user_id = " + user_id;
     orm.delete("users", condition, function(res) {
       cb(res);
     });
