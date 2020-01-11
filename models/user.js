@@ -7,7 +7,7 @@ var user = {
     });
   },
   selectUser: function(user_id, cb) {
-    var condition = "user_id" + user_id;
+    var condition = "user_id = " + user_id;
     orm.select("users", condition, function(res) {
       cb(res[0]);
     });
