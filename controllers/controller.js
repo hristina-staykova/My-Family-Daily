@@ -148,7 +148,7 @@ router.post("/api/signup", function(req, res) {
     // user.existingUser(email, function(result) - check if the username (email) already exists
     if (result.affectedRows == 1) {
       console.log("user is created");
-      res.end();
+      res.render("index");
     }
   });
 });
