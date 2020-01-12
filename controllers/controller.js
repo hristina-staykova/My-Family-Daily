@@ -127,9 +127,26 @@ router.get("/login", function(req, res) {
 //"index" is the main page after login/sign up - to be continued
 router.get("/index", function(req, res) {
   news.selectRecentNews(10, function(recentNews) {
-    user.selectUser(1, function(user) {
-      console.log({ recentNews, user });
-      res.render("index", { recentNews, user });
+    var news = recentNews;
+    var news_ids = [];
+    news.forEach(element => {
+      news_ids.push(element.news_id);
+    });
+    comment.selectNewsComments(news_ids, function(comments) {
+      news.forEach(newsEl => {
+        newsEl.comments = [];
+        comments.forEach(commentEl => {
+          console.log(commentEl);
+          if (commentEl.news_id === newsEl.news_id) {
+            newsEl.comments.push(commentEl);
+          }
+        });
+      });
+      console.log(news);
+      user.selectUser(1, function(user) {
+        console.log({ news, user, comments });
+        res.render("index", { news, user });
+      });
     });
   });
 });
