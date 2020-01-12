@@ -88,8 +88,8 @@ var orm = {
     queryString += cols.toString();
     queryString += ") ";
     queryString += "VALUES (";
-    queryString += printQuestionMarks(vals.length);
-    queryString += ") ";
+    queryString += vals;
+    queryString += ");";
 
     console.log(queryString);
 
@@ -97,7 +97,6 @@ var orm = {
       if (err) {
         throw err;
       }
-
       cb(result);
     });
   },
@@ -110,7 +109,6 @@ var orm = {
       if (err) {
         throw err;
       }
-
       cb(result);
     });
   },

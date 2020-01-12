@@ -144,10 +144,13 @@ router.post("/api/login", function(req, res) {
 
 //create new user and enter the page
 router.post("/api/signup", function(req, res) {
-  //check the request - how do we pass the email & password in insertUser(), check if the user exists - selectUser()
-  user.insertUser(req.body.user, cb);
-  //what do we render on signup - main page?
-  res.render("index");
+  user.insertUser(req.body.email, req.body.password, function(result) {
+    // user.existingUser(email, function(result) - check if the username (email) already exists
+    if (result.affectedRows == 1) {
+      console.log("user is created");
+      res.end();
+    }
+  });
 });
 
 // Export routes for server.js to use.

@@ -12,7 +12,9 @@ var user = {
       cb(res[0]);
     });
   },
-  insertUser: function(cols, vals, cb) {
+  insertUser: function(email, password, cb) {
+    var cols = "email, user_password";
+    var vals = "'" + email + "', '" + password + "'";
     orm.insert("users", cols, vals, function(res) {
       cb(res);
     });
@@ -27,6 +29,12 @@ var user = {
     var condition = "user_id = " + user_id;
     orm.delete("users", condition, function(res) {
       cb(res);
+    });
+  },
+  existingUser: function(email, cb) {
+    var condition = "email = '" + email + "' LIMIT 1";
+    orm.select("users", condition, function(result) {
+      cb(result);
     });
   }
 };
