@@ -27,8 +27,8 @@
             </nav>
         </div>
     </section>
-    {{#each recentNews }}
-    <article class="media">
+    {{#each news }}
+    <article class="media news" news-id="{{news_id}}" user-id="{{user_id}}">
 
         <figure class="media-left">
             <p class="image is-64x64">
@@ -38,14 +38,15 @@
         <div class="media-content">
             <div class="content">
                 <p>
-                    <strong>Written by:</strong>
+                    <strong>Written by: {{user_id}}</strong>
                     <br>
                     {{content}}
                     <br>
                     <small><a>Like</a> · <a>Reply</a> · created on:{{createdOn}}</small>
                 </p>
             </div>
-            <article class="media">
+            {{#each comments }}
+            <article class="media comment" comment-id="{{comment_id}}">
                 <figure class="media-left">
                     <p class="image is-48x48">
                         <img src="https://bulma.io/images/placeholders/96x96.png">
@@ -54,33 +55,34 @@
                 <div class="media-content">
                     <div class="content">
                         <p>
-                            <strong>Comment by: {{comments.user_id}}</strong>
+                            <strong>Comment by: {{user_id}}</strong>
                             <br>
-                            {{comments.content}}
+                            {{content}}
                             <br>
-                            <small><a>Like</a> · <a>Reply</a> · created on:{{comments.createdOn}}</small>
+                            <small><a>Like</a> · <a>Reply</a> · created on:{{createdOn}}</small>
                         </p>
                     </div>
                 </div>
-                <article class="media">
-                    <figure class="media-left">
-                        <p class="image is-64x64">
-                            <img src="https://bulma.io/images/placeholders/128x128.png">
+            </article>
+            {{/each}}
+            <article class="media">
+                <figure class="media-left">
+                    <p class="image is-64x64">
+                        <img src="https://bulma.io/images/placeholders/128x128.png">
+                    </p>
+                </figure>
+                <div class="media-content">
+                    <div class="field">
+                        <p class="control">
+                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
                         </p>
-                    </figure>
-                    <div class="media-content">
-                        <div class="field">
-                            <p class="control">
-                                <textarea class="textarea" placeholder="Add a comment..."></textarea>
-                            </p>
-                        </div>
-                        <div class="field">
-                            <p class="control">
-                                <button class="button">Post comment</button>
-                            </p>
-                        </div>
                     </div>
-                </article>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button">Post comment</button>
+                        </p>
+                    </div>
+                </div>
             </article>
         </div>
 

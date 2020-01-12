@@ -6,7 +6,12 @@ var comment = {
       cb(res);
     });
   },
-  selectNewsComments: function(condition, cb) {
+  selectNewsComments: function(news_id, cb) {
+    var condition = "news_id = " + news_id[0];
+    for (let index = 1; index < news_id.length; index++) {
+      condition += " OR news_id = ";
+      condition += news_id[index];
+    }
     orm.select("comments", condition, function(res) {
       cb(res);
     });
