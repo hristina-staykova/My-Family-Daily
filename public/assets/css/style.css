@@ -33,3 +33,17 @@ body {
 .tile.is-parent {
   padding: 30px;
 }
+
+.right {
+  margin: 0px 20px 0px 20px;
+  line-height: 40px;
+}
+
+.row {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.deleteBtn {
+  margin-left: 10px;
+}

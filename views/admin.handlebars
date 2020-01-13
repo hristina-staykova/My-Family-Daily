@@ -1,25 +1,58 @@
-this is the admin page
+This is the <a href="/admin"><strong>admin</strong></a> page
 <p>This is the raw information from the DB</p>
-{{!-- the code below is onyl to show the data from the DB --}}
-{{!I have to do this for news, users, comments}}
 <ul>
-    Results from the "users" table
+    Click to show all the <a href="/admin/users">"Users"</a>
     {{#each allUsers }}
-    <li>user ID: {{user_id}}, email: {{email}}, user password: {{user_password}}, admin: {{is_admin}}</li>
+    <li>
+        <div class="row">
+            <div class="left">
+                <button class="button is-rounded is-danger deleteBtn" data-id="{{user_id}}">
+                    Delete
+                </button>
+            </div>
+            <div class="right">
+                user ID: {{user_id}}, email: {{email}}, user password: {{user_password}}, admin: {{is_admin}}
+            </div>
+
+        </div>
+    </li>
     {{/each}}
 </ul>
 
 <ul>
-    Results from the "news" table
+    Click to show all the <a href="/admin/news">"News"</a>
     {{#each allNews }}
-    <li>user ID: {{news_id}}, content: {{content}}, user_id: {{user_id}}, created on: {{createdOn}}</li>
+    <li>
+        <div class="row">
+            <div class="left">
+                <button class="button is-rounded is-danger deleteBtn" data-id="{{news_id}}">
+                    Delete
+                </button>
+            </div>
+            <div class="right">
+                News ID: {{news_id}}, content: {{content}}, user_id: {{user_id}}, created on: {{createdOn}}
+            </div>
+        </div>
+    </li>
     {{/each}}
 </ul>
 
 <ul>
-    Results from the "comments" table
+    Click to show all the <a href="/admin/comments">"Comments"</a>
     {{#each allComments }}
-    <li>comment ID: {{comment_id}}, content: {{content}}, user_id: {{user_id}},news_id: {{news_id}} created on:
-        {{createdOn}}</li>
+    <li>
+        <div class="row">
+            <div class="left">
+                <button class="button is-rounded is-danger deleteBtn" data-id="{{comment_id}}">
+                    Delete
+                </button>
+            </div>
+            <div class="right">
+                Comment ID: {{comment_id}}, content: {{content}}, user_id: {{user_id}}, news_id: {{news_id}}, created
+                on:
+                {{createdOn}}
+            </div>
+        </div>
+    </li>
     {{/each}}
 </ul>
