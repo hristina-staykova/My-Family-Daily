@@ -158,11 +158,17 @@ router.post("/api/login", function(req, res) {
 
 //create new user and enter the page
 router.post("/api/signup", function(req, res) {
-  user.insertUser(req.body.email, req.body.password, function(result) {
-    // user.existingUser(email, function(result) - check if the username (email) already exists
-    if (result.affectedRows == 1) {
-      console.log("user is created");
-      res.render("index");
+  user.existingUser(req.body.email, function(result) {
+    if (result[0] != undefined) {
+      console.log(result[0]);
+      res.render("signup", {
+        error: "This email is already taken, choose another one"
+      });
+    } else {
+      user.insertUser(req.body.email, req.body.password, function(result) {
+        console.log("user is created");
+        res.render("index", { result });
+      });
     }
   });
 });
