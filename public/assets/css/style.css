@@ -19,8 +19,13 @@ body {
   bottom: 0;
   width: 100%;
   text-align: center;
+  padding: 1rem 1.5rem 1rem !important;
 }
 
 .columns {
   padding-top: 10px;
+}
+
+.addNewsContainer {
+  margin-top: 20px;
 }
