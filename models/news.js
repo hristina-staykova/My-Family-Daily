@@ -13,6 +13,7 @@ var news = {
     });
   },
   insertNews: function(cols, vals, cb) {
+    vals[0] = "'" + vals[0] + "'";
     orm.insert("news", cols, vals, function(res) {
       cb(res);
     });

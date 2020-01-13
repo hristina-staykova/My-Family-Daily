@@ -17,6 +17,7 @@ var comment = {
     });
   },
   insertComment: function(cols, vals, cb) {
+    vals[0] = "'" + vals[0] + "'";
     orm.insert("comments", cols, vals, function(res) {
       cb(res);
     });

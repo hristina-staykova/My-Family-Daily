@@ -90,8 +90,6 @@ router.post("/api/news", function(req, res) {
     [req.body.content, req.body.user_id],
     function(result) {
       res.json({ id: result.insertId });
-      //we display the new news entry as a first entry?
-      // res.render("index");
     }
   );
 });
@@ -104,7 +102,6 @@ router.post("/api/comments", function(req, res) {
     [req.body.content, req.body.user_id, req.body.news_id],
     function(result) {
       res.json({ id: result.insertId });
-      // res.render("index");
     }
   );
 });
