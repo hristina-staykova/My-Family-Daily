@@ -29,3 +29,7 @@ body {
 .addNewsContainer {
   margin-top: 20px;
 }
+
+.tile.is-parent {
+  padding: 30px;
+}
