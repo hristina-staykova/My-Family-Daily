@@ -2,6 +2,25 @@
 // here come all the functionalities on the page - listeners, ajax calls, etc.
 
 $(function() {
+  $("#signUpButton").on("submit", function(event) {
+    event.preventDefault();
+
+    var newUser = {
+      email: $("#userEmail")
+        .val()
+        .trim(),
+      password: $("#userPassword")
+        .val()
+        .trim()
+    };
+    $.ajax(
+      "/api/signup",
+      { type: "POST", data: newUser }.then(function(event) {
+        //to be continued
+      })
+    );
+  });
+
   $(".addNews").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();

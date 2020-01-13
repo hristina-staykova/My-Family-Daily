@@ -1,9 +1,13 @@
+<figure class="image is-3by2">
+    <img src="/assets/images/Family-News-Image.jpg">
+</figure>
 <h1 class="title is-1">Sign Up</h1>
 
 <div class="container">
+    <p>{{error}}</p>
     <div class="field">
         <p class="control has-icons-left has-icons-right">
-            <input class="input" type="email" placeholder="Email">
+            <input class="input" type="email" required placeholder="Email" id="userEmail">
             <span class="icon is-small is-left">
                 <i class="fas fa-envelope"></i>
             </span>
@@ -14,7 +18,7 @@
     </div>
     <div class="field">
         <p class="control has-icons-left">
-            <input class="input" type="password" placeholder="Password">
+            <input class="input" type="password" required placeholder="Password" id="userPassword">
             <span class="icon is-small is-left">
                 <i class="fas fa-lock"></i>
             </span>
@@ -22,7 +26,7 @@
     </div>
     <div class="field">
         <p class="control">
-            <button class="button is-success">
+            <button class="button is-success" id="signUpButton">
                 Sign up
             </button>
         </p>
@@ -35,3 +39,11 @@
         </a>
     </div>
 </div>
+<footer class="footer">
+    <div class="content has-text-centered">
+        <p>
+            <strong>Family News Website</strong> by Hristina, Saul, Ana Paula. ESMT Coding
+            Bootcamp.
+        </p>
+    </div>
+</footer>

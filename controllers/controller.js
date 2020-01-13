@@ -156,7 +156,8 @@ router.post("/api/login", function(req, res) {
   res.render("login");
 });
 
-//create new user and enter the page
+//create new user - OK
+// and enter the page
 router.post("/api/signup", function(req, res) {
   user.existingUser(req.body.email, function(result) {
     if (result[0] != undefined) {
