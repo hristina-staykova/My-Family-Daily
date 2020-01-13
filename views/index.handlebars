@@ -20,13 +20,36 @@
                 <div class="navbar-brand has-icons-right">
                     <h1 class="navbar-item">Family Daily</h1>
                     <div class="buttons">
-                        <button class="button is-primary">Logged as {{user.email}}</button>
-                        <button class="button is-danger">Logout</button>
+                        <button class="button userBtn is-primary" user_id="{{user.user_id}}">Logged as
+                            {{user.email}}</button>
+                        <a class="control" href="/login"><button class="button is-danger">Logout</button></a>
                     </div>
                 </div>
             </nav>
         </div>
     </section>
+    <article class="media addNewsContainer">
+        <figure class="media-left">
+            <p class="image is-64x64">
+                <img src="https://bulma.io/images/placeholders/128x128.png">
+            </p>
+        </figure>
+        <div class="media-content">
+            <form class="addNews">
+                <div class="field">
+                    <p class="control">
+                        <textarea class="textarea" placeholder="Add a News..." id="content"></textarea>
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control">
+                        <button class="button newsBtn" type="submit">Post News</button>
+                    </p>
+                </div>
+            </form>
+        </div>
+
+    </article>
     {{#each news }}
     <article class="media news" news-id="{{news_id}}" user-id="{{user_id}}">
 
@@ -72,16 +95,19 @@
                     </p>
                 </figure>
                 <div class="media-content">
-                    <div class="field">
-                        <p class="control">
-                            <textarea class="textarea" placeholder="Add a comment..."></textarea>
-                        </p>
-                    </div>
-                    <div class="field">
-                        <p class="control">
-                            <button class="button">Post comment</button>
-                        </p>
-                    </div>
+                    <form class="addComment" news_id="{{news_id}}">
+                        <div class="field">
+                            <p class="control">
+                                <textarea class="textarea" placeholder="Add a comment..." id="content"></textarea>
+                            </p>
+                        </div>
+                        <div class="field">
+                            <p class="control">
+                                <button class="button commentBtn" type="submit">Post
+                                    comment</button>
+                            </p>
+                        </div>
+                    </form>
                 </div>
             </article>
         </div>
