@@ -90,8 +90,6 @@ router.post("/api/news", function(req, res) {
     [req.body.content, req.body.user_id],
     function(result) {
       res.json({ id: result.insertId });
-      //we display the new news entry as a first entry?
-      // res.render("index");
     }
   );
 });
@@ -104,7 +102,6 @@ router.post("/api/comments", function(req, res) {
     [req.body.content, req.body.user_id, req.body.news_id],
     function(result) {
       res.json({ id: result.insertId });
-      // res.render("index");
     }
   );
 });
@@ -159,12 +156,22 @@ router.post("/api/login", function(req, res) {
   res.render("login");
 });
 
-//create new user and enter the page
+//create new user - OK
+// and enter the page
 router.post("/api/signup", function(req, res) {
-  //check the request - how do we pass the email & password in insertUser(), check if the user exists - selectUser()
-  user.insertUser(req.body.user, cb);
-  //what do we render on signup - main page?
-  res.render("index");
+  user.existingUser(req.body.email, function(result) {
+    if (result[0] != undefined) {
+      console.log(result[0]);
+      res.render("signup", {
+        error: "This email is already taken, choose another one"
+      });
+    } else {
+      user.insertUser(req.body.email, req.body.password, function(result) {
+        console.log("user is created");
+        res.render("index", { result });
+      });
+    }
+  });
 });
 
 // Export routes for server.js to use.
