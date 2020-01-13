@@ -13,7 +13,25 @@ $(function() {
         .val()
         .trim()
     };
-    // eslint-disable-next-line no-undef
+    $.ajax(
+      "/api/signup",
+      { type: "POST", data: newUser }.then(function(event) {
+        //to be continued
+      })
+    );
+  });
+
+  $("#loginButton").on("submit", function(event) {
+    event.preventDefault();
+
+    var user = {
+      email: $("#userEmail")
+        .val()
+        .trim(),
+      password: $("#userPassword")
+        .val()
+        .trim()
+    };
     $.ajax(
       "/api/signup",
       { type: "POST", data: newUser }.then(function(event) {

@@ -12,6 +12,12 @@ var user = {
       cb(res[0]);
     });
   },
+  selectUserByEmail: function(email, cb) {
+    var condition = "email = '" + email + "'";
+    orm.select("users", condition, function(res) {
+      cb(res[0]);
+    });
+  },
   insertUser: function(email, password, cb) {
     var cols = "email, user_password";
     var vals = "'" + email + "', '" + password + "'";

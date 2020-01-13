@@ -1,11 +1,9 @@
-// all routes to be put here
 var express = require("express");
 var router = express.Router();
 var comment = require("../models/comment.js");
 var user = require("../models/user.js");
 var news = require("../models/news.js");
-
-// var orm = require("../config/orm.js");
+var passport = require("../config/passport.js");
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -133,28 +131,24 @@ router.get("/index", function(req, res) {
       news.forEach(newsEl => {
         newsEl.comments = [];
         comments.forEach(commentEl => {
-          console.log(commentEl);
           if (commentEl.news_id === newsEl.news_id) {
             newsEl.comments.push(commentEl);
           }
         });
       });
-      console.log(news);
       user.selectUser(1, function(user) {
-        console.log({ news, user, comments });
         res.render("index", { news, user });
       });
     });
   });
 });
 
-router.post("/api/login", function(req, res) {
-  //selectUser()
-  //- if user exists
-  //- if password is correct
-  //- if user is admin
-  res.render("login");
-});
+router.post(
+  "/api/login",
+  passport.authenticate("local", {
+    successRedirect: "/index"
+  })
+);
 
 //create new user - OK
 // and enter the page
