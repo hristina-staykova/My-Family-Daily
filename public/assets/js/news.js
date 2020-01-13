@@ -2,23 +2,46 @@
 // here come all the functionalities on the page - listeners, ajax calls, etc.
 
 $(function() {
-  $(".create-form").on("submit", function(event) {
+  $(".addNews").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
 
-    var newBurger = {
-      name: $("#burger")
+    var newNews = {
+      content: $("#content")
         .val()
-        .trim()
+        .trim(),
+      user_id: document.querySelector(".userBtn").getAttribute("user_id")
     };
 
-    if (newBurger.name.length > 0) {
+    if (newNews.content.length > 0) {
+      // Send the POST request.
+      $.ajax("/api/news", {
+        type: "POST",
+        data: newNews
+      }).then(function() {
+        console.log("created new News");
+        // Reload the page to get the updated list
+        location.reload();
+      });
+    }
+  });
+
+  $(".addComment").on("submit", function(event) {
+    // Make sure to preventDefault on a submit event.
+    event.preventDefault();
+
+    var newComment = {
+      content: this.querySelector("textarea").value.trim(),
+      user_id: document.querySelector(".userBtn").getAttribute("user_id"),
+      news_id: this.getAttribute("news_id")
+    };
+    if (newComment.content.length > 0) {
       // Send the POST request.
       $.ajax("/api/comments", {
         type: "POST",
-        data: newBurger
+        data: newComment
       }).then(function() {
-        console.log("created new burger");
+        console.log("created new Comment");
         // Reload the page to get the updated list
         location.reload();
       });
