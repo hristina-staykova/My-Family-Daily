@@ -11,9 +11,6 @@ $(function() {
         .trim()
     };
 
-    console.log(user);
-
-    // // eslint-disable-next-line no-undef
     $.ajax("/api/login", {
       type: "POST",
       data: user

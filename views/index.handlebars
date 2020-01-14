@@ -1,11 +1,11 @@
-<section class="hero is-small is-transparent">
+<section class="hero is-small is-light">
     <div class="hero-body">
         <nav class="navbar" role="navigation">
             <div class="navbar-brand has-icons-right">
                 <h1 class="title is-3 navbar-item">My Family Daily</h1>
-                <div class="navbar-item userBtn is-primary" user_id="{{user.user_id}}">Logged as: </div>
+                <div class="navbar-item userBtn is-primary" user_id="{{user.user_id}}">Logged as: {{user.email}} </div>
                 <div class="buttons">
-                    <a class="control" href="/login"><button class="button is-danger">Logout</button></a>
+                    <a class="control" href="/logout"><button class="button is-danger">Logout</button></a>
                 </div>
             </div>
         </nav>
@@ -40,7 +40,6 @@
                 </article>
                 {{#each news }}
                 <article class="media news" news-id="{{news_id}}" user-id="{{user_id}}">
-
                     <figure class="media-left">
                         <p class="image is-64x64">
                             <img src="https://picsum.photos/128">
