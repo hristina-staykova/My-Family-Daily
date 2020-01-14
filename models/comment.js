@@ -12,7 +12,11 @@ var comment = {
       condition += " OR news_id = ";
       condition += news_id[index];
     }
-    orm.select("comments", condition, function(res) {
+    var queryString = `SELECT comments.*, users.email FROM comments
+    LEFT JOIN users ON users.user_id = comments.user_id
+    WHERE ${condition}`;
+
+    orm.execute(queryString, function(res) {
       cb(res);
     });
   },

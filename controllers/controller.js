@@ -140,9 +140,10 @@ router.get("/index", isAuthenticated, function(req, res) {
           }
         });
       });
-      console.log(req.user, " logged user");
-      var loggedAs = req.user;
-      res.render("index", { news, loggedAs });
+      user.selectUserByEmail(req.user, function(user) {
+        console.log(user);
+        res.render("index", { news, user });
+      });
     });
   });
 });
