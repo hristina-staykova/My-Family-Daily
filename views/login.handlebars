@@ -1,44 +1,61 @@
-<figure class="image is-3by1">
-    <img src="/assets/images/Family-News-Image.jpg">
-</figure>
-
-<h1 class="title is-1 has-text-centered">Login</h1>
-
-<div class="container">
-    <form class="login">
-        <div class="field">
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" name="email" type="email" required placeholder="Email" id="userEmail">
-                <span class=" icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                </span>
-                <span class="icon is-small is-right">
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="password" name="password" required placeholder="Password" id="userPassword">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <p class="control">
-                <button class="button is-success btnUp" type="submit" id="loginButton">
-                    Login
-                </button>
-            </p>
-        </div>
-    </form>
-    <div class="field">
-        <a class="control" href="/signup">
-            <button class="button is-success">
-                Sign up
-            </button>
-        </a>
+<section class="hero is-small">
+    <div class="hero-body">
+        <nav class="navbar is-transparent">
+            <div class="navbar-brand">
+                <h1 class="title">My Family Daily</h1>
+            </div>
+        </nav>
     </div>
-</div>
+</section>
+
+<section class="container">
+    <div class="columns">
+        <div class="column is-three-quarters">
+            <figure class="image is-3by2">
+                <img src="/assets/images/Family-News-Image.jpg">
+            </figure>
+        </div>
+        <div class="column">
+            <h1 class="title is-3 has-text-centered">Login</h1>
+            <div class="container">
+                <form class="login">
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" name="email" type="email" required placeholder="Email" id="userEmail">
+                            <span class=" icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input" type="password" name="password" required placeholder="Password"
+                                id="userPassword">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button is-success btnUp" type="submit" id="loginButton">
+                                Login
+                            </button>
+                        </p>
+                    </div>
+                </form>
+                <div class="field">
+                    <a class="control" href="/signup">
+                        <button class="button is-light is-small">
+                            Sign up
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script type="text/javascript" src="/assets/js/login.js"></script>

@@ -1,45 +1,62 @@
-<figure class="image is-3by2">
-    <img src="/assets/images/Family-News-Image.jpg">
-</figure>
-<h1 class="title is-1 has-text-centered">Sign Up</h1>
-
-<div class="container">
-    <p>{{error}}</p>
-    <form class="signUp">
-        <div class="field">
-            <p class="control has-icons-left has-icons-right">
-                <input class="input" type="email" required placeholder="Email" id="userEmail">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-envelope"></i>
-                </span>
-                <span class="icon is-small is-right">
-                    <i class="fas fa-check"></i>
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <p class="control has-icons-left">
-                <input class="input" type="password" required placeholder="Password" id="userPassword">
-                <span class="icon is-small is-left">
-                    <i class="fas fa-lock"></i>
-                </span>
-            </p>
-        </div>
-        <div class="field">
-            <p class="control">
-                <button class="button is-success btnUp" type="submit" id="signUpButton">
-                    Sign up
-                </button>
-            </p>
-        </div>
-    </form>
-    <div class="field">
-        <a class="control" href="/login">
-            <button class="button is-success">
-                Login
-            </button>
-        </a>
+<section class="hero is-small">
+    <div class="hero-body">
+        <nav class="navbar is-transparent">
+            <div class="navbar-brand">
+                <h1 class="title">My Family Daily</h1>
+            </div>
+        </nav>
     </div>
-</div>
+</section>
+
+<section class="container">
+    <div class="columns">
+        <div class="column is-three-quarters">
+            <figure class="image is-3by2">
+                <img src="/assets/images/Family-News-Image.jpg">
+            </figure>
+        </div>
+        <div class="column">
+            <h1 class="title is-3 has-text-centered">Sign Up</h1>
+            <div class="container">
+                <p>{{error}}</p>
+                <form class="signUp">
+                    <div class="field">
+                        <p class="control has-icons-left has-icons-right">
+                            <input class="input" type="email" required placeholder="Email" id="userEmail">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-envelope"></i>
+                            </span>
+                            <span class="icon is-small is-right">
+                                <i class="fas fa-check"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control has-icons-left">
+                            <input class="input" type="password" required placeholder="Password" id="userPassword">
+                            <span class="icon is-small is-left">
+                                <i class="fas fa-lock"></i>
+                            </span>
+                        </p>
+                    </div>
+                    <div class="field">
+                        <p class="control">
+                            <button class="button is-success btnUp" type="submit" id="signUpButton">
+                                Sign up
+                            </button>
+                        </p>
+                    </div>
+                </form>
+                <div class="field">
+                    <a class="control" href="/login">
+                        <button class="button is-light is-small">
+                            Login
+                        </button>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 <script type="text/javascript" src="/assets/js/signup.js"></script>

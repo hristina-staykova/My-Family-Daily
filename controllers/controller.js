@@ -140,9 +140,9 @@ router.get("/index", isAuthenticated, function(req, res) {
           }
         });
       });
-      user.selectUser(1, function(user) {
-        res.render("index", { news, user });
-      });
+      console.log(req.user, " logged user");
+      var loggedAs = req.user;
+      res.render("index", { news, loggedAs });
     });
   });
 });
