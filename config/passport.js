@@ -7,11 +7,11 @@ passport.use(
     {
       usernameField: "email"
     },
-    function(username, password, done) {
-      user.selectUserByEmail(username, function(result) {
+    function(email, password, done) {
+      user.selectUserByEmail(email, function(result) {
         if (result == undefined || result.user_password !== password) {
           return done(null, false, {
-            message: "Incorrect username or password."
+            message: "Incorrect email or password."
           });
         }
         return done(null, result.email);

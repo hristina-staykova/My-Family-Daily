@@ -19,13 +19,10 @@ var news = {
     });
   },
   deleteNews: function(news_id, cb) {
-    var queryString =
-      `
-        DELETE news, comments
-        FROM news
-        INNER JOIN comments ON news.news_id = comments.news_id
-        WHERE news.news_id =` + news_id;
-    orm.execute(queryString, cb);
+    var condition = "news_id = " + news_id;
+    orm.delete("news", condition, function(res) {
+      cb(res);
+    });
   }
 };
 
