@@ -4,6 +4,7 @@
   "description": "2nd project @ Coding Bootcamp ESMT Berlin",
   "main": "server.js",
   "dependencies": {
+    "cors": "^2.8.5",
     "dotenv": "^8.2.0",
     "express": "^4.16.3",
     "express-handlebars": "^3.1.0",

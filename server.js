@@ -3,6 +3,8 @@ var session = require("express-session");
 var passport = require("./config/passport.js");
 var PORT = process.env.PORT || 8080;
 var app = express();
+const cors = require('cors');
+
 
 app.use(
   session({
@@ -16,6 +18,8 @@ app.use(passport.session());
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
+app.use(cors());
+app.options('*', cors());
 
 // Parse application body as JSON
 app.use(express.urlencoded({ extended: true }));
@@ -33,7 +37,7 @@ var routes = require("./controllers/controller.js");
 app.use(routes);
 
 // Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
+app.listen(PORT, function () {
   // Log (server-side) when our server has started
   console.log("Server listening on: http://localhost:" + PORT);
 });
