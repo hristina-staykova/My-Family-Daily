@@ -4,6 +4,8 @@ var comment = require("../models/comment.js");
 var user = require("../models/user.js");
 var news = require("../models/news.js");
 var passport = require("../config/passport.js");
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -119,8 +121,10 @@ router.get("/login", function(req, res) {
   res.render("login");
 });
 
-//"index" is the main page after login/sign up - to be continued
-router.get("/index", function(req, res) {
+//"index" is the main page after login/sign up -
+// Here we've add our isAuthenticated middleware to this route.
+// If a user who is not logged in tries to access this route they will be redirected to the signup page
+router.get("/index", isAuthenticated, function(req, res) {
   news.selectRecentNews(10, function(recentNews) {
     var news = recentNews;
     var news_ids = [];
@@ -143,12 +147,9 @@ router.get("/index", function(req, res) {
   });
 });
 
-router.post(
-  "/api/login",
-  passport.authenticate("local", {
-    successRedirect: "/index"
-  })
-);
+router.post("/api/login", passport.authenticate("local"), function(req, res) {
+  res.json(req.user);
+});
 
 //create new user - OK
 // and enter the page
@@ -162,10 +163,32 @@ router.post("/api/signup", function(req, res) {
     } else {
       user.insertUser(req.body.email, req.body.password, function(result) {
         console.log("user is created");
-        res.render("index", { result });
+        res.json(req.user);
       });
     }
   });
+});
+
+// Route for logging user out
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
+// Route for getting some data about our user to be used client side
+router.get("/user_data", function(req, res) {
+  if (!req.user) {
+    console.log(req.user);
+    // The user is not logged in, send back an empty object
+    res.json({});
+  } else {
+    // Otherwise send back the user's email and id
+    // Sending back a password, even a hashed password, isn't a good idea
+    res.json({
+      email: req.user.email,
+      id: req.user.user_id
+    });
+  }
 });
 
 // Export routes for server.js to use.
