@@ -17,13 +17,40 @@ h1 {
 }
 
 .footer {
-  position: fixed;
+  position: relative;
   left: 0;
   bottom: 0;
   width: 100%;
   text-align: center;
+  padding: 1rem 1.5rem 1rem !important;
 }
 
 .columns {
   padding-top: 10px;
+}
+
+.addNewsContainer {
+  margin-top: 20px;
+}
+
+.tile.is-parent {
+  padding: 30px;
+}
+
+.right {
+  margin: 0px 20px 0px 20px;
+  line-height: 40px;
+}
+
+.row {
+  display: flex;
+  margin: 10px 0px;
+}
+
+.deleteBtn {
+  margin-left: 10px;
+}
+
+.btnUp {
+  margin-bottom: 5px;
 }

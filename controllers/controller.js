@@ -1,11 +1,11 @@
-// all routes to be put here
 var express = require("express");
 var router = express.Router();
 var comment = require("../models/comment.js");
 var user = require("../models/user.js");
 var news = require("../models/news.js");
-
-// var orm = require("../config/orm.js");
+var passport = require("../config/passport.js");
+// Requiring our custom middleware for checking if a user is logged in
+var isAuthenticated = require("../config/middleware/isAuthenticated");
 
 // Create all our routes and set up logic within those routes where required.
 
@@ -14,13 +14,8 @@ router.get("/admin", function (req, res) {
   res.render("admin");
 });
 
-<<<<<<< Updated upstream
-//admin page - get and display users from the db - OK
-router.get("/admin/users", function (req, res) {
-=======
 //admin page - get and display users from the db
 router.get("/admin/users", function(req, res) {
->>>>>>> Stashed changes
   console.log("admin users page");
   user.selectAllUsers(function (allUsers) {
     console.log(allUsers);
@@ -28,41 +23,24 @@ router.get("/admin/users", function(req, res) {
   });
 });
 
-<<<<<<< Updated upstream
-//admin page - get and display news from the db - OK
-router.get("/admin/news", function (req, res) {
-  news.selectAllNews(function (allNews) {
-=======
 //admin page - get and display news from the db
 router.get("/admin/news", function(req, res) {
   news.selectAllNews(function(allNews) {
->>>>>>> Stashed changes
     console.log(allNews);
     res.render("admin", { allNews });
   });
 });
 
-<<<<<<< Updated upstream
-//admin page - get and display comments from the db - OK
-router.get("/admin/comments", function (req, res) {
-  comment.selectAllComments(function (allComments) {
-=======
 //admin page - get and display comments from the db
 router.get("/admin/comments", function(req, res) {
   comment.selectAllComments(function(allComments) {
->>>>>>> Stashed changes
     console.log(allComments);
     res.render("admin", { allComments });
   });
 });
 
-<<<<<<< Updated upstream
-//admin page - delete user from the db - OK
-router.delete("/admin/users/:id", function (req, res) {
-=======
 //admin page - delete user from the db
 router.delete("/admin/users/:id", function(req, res) {
->>>>>>> Stashed changes
   var user_id = req.params.id;
   user.deleteUser(user_id, function (result) {
     console.log(result);
@@ -70,13 +48,8 @@ router.delete("/admin/users/:id", function(req, res) {
   });
 });
 
-<<<<<<< Updated upstream
-//admin page - delete comment by id from the db - OK
-router.delete("/admin/comments/:id", function (req, res) {
-=======
 //admin page - delete comment by id from the db
 router.delete("/admin/comments/:id", function(req, res) {
->>>>>>> Stashed changes
   var comment_id = req.params.id;
   comment.deleteComment(comment_id, function (comments) {
     console.log(comments);
@@ -84,13 +57,8 @@ router.delete("/admin/comments/:id", function(req, res) {
   });
 });
 
-<<<<<<< Updated upstream
-//admin page - update/edit user by id from the db - OK
-router.put("/admin/users/:id", function (req, res) {
-=======
 //admin page - update/edit user by id from the db
 router.put("/admin/users/:id", function(req, res) {
->>>>>>> Stashed changes
   var user_id = req.params.id;
   var objColVals = {};
   if (req.body.user_password != null) {
@@ -105,13 +73,8 @@ router.put("/admin/users/:id", function(req, res) {
   });
 });
 
-<<<<<<< Updated upstream
-//admin page - delete news by id from the db + its comments - OK
-router.delete("/admin/news/:id", function (req, res) {
-=======
 //admin page - delete news by id from the db + its comments
 router.delete("/admin/news/:id", function(req, res) {
->>>>>>> Stashed changes
   var news_id = req.params.id;
   news.deleteNews(news_id, function (news) {
     console.log(news);
@@ -119,13 +82,8 @@ router.delete("/admin/news/:id", function(req, res) {
   });
 });
 
-<<<<<<< Updated upstream
-//adding new news - OK
-router.post("/api/news", function (req, res) {
-=======
 //adding new news
 router.post("/api/news", function(req, res) {
->>>>>>> Stashed changes
   //check the request - the news content and the logged user id
   news.insertNews(
     ["content", "user_id"],
@@ -138,13 +96,8 @@ router.post("/api/news", function(req, res) {
   );
 });
 
-<<<<<<< Updated upstream
-//adding a comment to news - OK
-router.post("/api/comments", function (req, res) {
-=======
 //adding a comment to news
 router.post("/api/comments", function(req, res) {
->>>>>>> Stashed changes
   //check the request - the content and the logged user_id and the news_id
   comment.insertComment(
     ["content", "user_id", "news_id"],
@@ -156,29 +109,6 @@ router.post("/api/comments", function(req, res) {
   );
 });
 
-<<<<<<< Updated upstream
-//on "/" we see the login page - OK
-router.get("/", function (req, res) {
-  res.render("login");
-});
-
-//OK
-router.get("/signup", function (req, res) {
-  res.render("signup");
-});
-
-//OK
-router.get("/login", function (req, res) {
-  res.render("login");
-});
-
-//"index" is the main page after login/sign up - to be continued
-router.get("/index", function (req, res) {
-  news.selectRecentNews(10, function (recentNews) {
-    user.selectUser(1, function (user) {
-      console.log({ recentNews, user });
-      res.render("index", { recentNews, user });
-=======
 //on "/" we see the login page
 router.get("/", function(req, res) {
   res.render("login");
@@ -214,25 +144,52 @@ router.get("/index", isAuthenticated, function(req, res) {
       console.log(req.user, " logged user");
       var loggedAs = req.user;
       res.render("index", { news, loggedAs });
->>>>>>> Stashed changes
     });
   });
 });
 
-router.post("/api/login", function (req, res) {
-  //selectUser()
-  //- if user exists
-  //- if password is correct
-  //- if user is admin
-  res.render("login");
+router.post("/api/login", passport.authenticate("local"), function(req, res) {
+  res.json(req.user);
 });
 
-//create new user and enter the page
-router.post("/api/signup", function (req, res) {
-  //check the request - how do we pass the email & password in insertUser(), check if the user exists - selectUser()
-  user.insertUser(req.body.user, cb);
-  //what do we render on signup - main page?
-  res.render("index");
+//create new user - OK
+// and enter the page
+router.post("/api/signup", function(req, res) {
+  user.existingUser(req.body.email, function(result) {
+    if (result[0] != undefined) {
+      console.log(result[0]);
+      res.render("signup", {
+        error: "This email is already taken, choose another one"
+      });
+    } else {
+      user.insertUser(req.body.email, req.body.password, function(result) {
+        console.log("user is created");
+        res.json(req.user);
+      });
+    }
+  });
+});
+
+// Route for logging user out
+router.get("/logout", function(req, res) {
+  req.logout();
+  res.redirect("/");
+});
+
+// Route for getting some data about our user to be used client side
+router.get("/user_data", function(req, res) {
+  if (!req.user) {
+    console.log(req.user);
+    // The user is not logged in, send back an empty object
+    res.json({});
+  } else {
+    // Otherwise send back the user's email and id
+    // Sending back a password, even a hashed password, isn't a good idea
+    res.json({
+      email: req.user.email,
+      id: req.user.user_id
+    });
+  }
 });
 
 // Export routes for server.js to use.
