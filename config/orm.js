@@ -62,20 +62,16 @@ var orm = {
     });
   },
   selectAndLimit: function(
-    table,
     howMany,
     cb,
     colToOrder = "createdOn",
     dir = "DESC"
   ) {
-    var queryString = `SELECT * FROM ?? ORDER BY ?? ${
-      dir === "DESC" ? "DESC" : "ASC"
-    } LIMIT ?`;
-    console.log(queryString);
-    connection.query(queryString, [table, colToOrder, howMany], function(
-      err,
-      result
-    ) {
+    var queryString = `SELECT news.*, users.email FROM news 
+        LEFT JOIN users ON news.user_id = users.user_id
+        ORDER BY ?? ${dir === "DESC" ? "DESC" : "ASC"}
+        LIMIT ?;`;
+    connection.query(queryString, [colToOrder, howMany], function(err, result) {
       if (err) throw err;
       cb(result);
     });

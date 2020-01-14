@@ -3,7 +3,7 @@ var orm = require("../config/orm.js");
 
 var news = {
   selectRecentNews: function(howMany, cb) {
-    orm.selectAndLimit("news", howMany, function(res) {
+    orm.selectAndLimit(howMany, function(res) {
       cb(res);
     });
   },
