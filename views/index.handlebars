@@ -5,7 +5,7 @@
                 <h1 class="navbar-item title">My Family Daily</h1>
             </div>
             <div class="navbar-end">
-                <div class="navbar-item userBtn is-primary" user_id="{{user.user_id}}">Logged as: {{user.email}}
+                <div class="navbar-item userBtn" user_id="{{user.user_id}}">Logged as: {{user.email}}
                 </div>
                 {{#if user.is_admin}}
                 <a class="control navbar-item" href="/admin"><button class="button is-link">Admin
@@ -63,7 +63,7 @@
                                 <br>
                                 {{content}}
                                 <br>
-                                <small><a>Like</a> · <a>Reply</a> · created on: {{shortDate createdOn}}</small>
+                                created on: {{shortDate createdOn}}</small>
                             </p>
                         </div>
                         {{#each comments }}
@@ -80,7 +80,7 @@
                                         <br>
                                         {{content}}
                                         <br>
-                                        <small><a>Like</a> · <a>Reply</a> · added on: {{shortDate createdOn}}</small>
+                                        added on: {{shortDate createdOn}}</small>
                                     </p>
                                 </div>
                             </div>
@@ -102,15 +102,13 @@
                                     </div>
                                     <div class="field">
                                         <p class="control">
-                                            <button class="button commentBtn" type="submit">Post
-                                                comment</button>
+                                            <button class="button commentBtn" type="submit">Post comment</button>
                                         </p>
                                     </div>
                                 </form>
                             </div>
                         </article>
                     </div>
-
                 </article>
                 {{/each}}
             </div>
@@ -126,7 +124,31 @@
                             <p id="weather">........</p>
                         </div>
                         <div class="tile is-child box">
-                            <p>Invite your family!</p>
+                            <p class="button is-link">Invite your family!</p>
+                        </div>
+                        <div class="tile is-child box">
+                            <p class="button is-danger changePswrd">Change your password</p>
+                            <div class="modal">
+                                <div class="modal-background"></div>
+                                <div class="modal-content">
+                                    <form class="login">
+                                        <div class="field">
+                                            <p class="control">
+                                                <input class="input" type="password" name="password" required
+                                                    placeholder="Enter your new password here" id="userPassword">
+                                            </p>
+                                        </div>
+                                        <div class="field">
+                                            <p class="control">
+                                                <button class="button is-danger" type="submit" id="changePasswordBtn">
+                                                    Login
+                                                </button>
+                                            </p>
+                                        </div>
+                                    </form>
+                                </div>
+                                <button class="modal-close is-large" aria-label="close"></button>
+                            </div>
                         </div>
                     </div>
                 </div>

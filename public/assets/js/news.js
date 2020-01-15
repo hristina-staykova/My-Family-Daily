@@ -29,7 +29,6 @@ $(function() {
   $(".addComment").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
-
     var newComment = {
       content: this.querySelector("textarea").value.trim(),
       user_id: document.querySelector(".userBtn").getAttribute("user_id"),
@@ -46,5 +45,28 @@ $(function() {
         location.reload();
       });
     }
+  });
+
+  //the user can change its password
+  $(".changePswrd").on("click", function() {
+    $(".modal").addClass("is-active");
+  });
+
+  $(".changePasswordBtn").on("submit", function(event) {
+    event.preventDefault();
+    var newPassword = $(".changePasswordBtn")
+      .val()
+      .trim();
+    console.log(newPassword);
+    $.ajax(
+      "/new-password",
+      { type: "POST", data: newPassword }.then(function() {
+        console.log("password saved");
+      })
+    );
+  });
+
+  $(".modal-close").on("click", function() {
+    $(".modal").removeClass("is-active");
   });
 });
