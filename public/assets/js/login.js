@@ -18,7 +18,7 @@ $(function() {
       .then(function() {
         window.location.replace("/index");
       })
-      .catch(function(err) {
+      .fail(function(err) {
         console.log(err);
       });
   });
