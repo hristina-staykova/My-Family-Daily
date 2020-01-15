@@ -10,8 +10,14 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 // Create all our routes and set up logic within those routes where required.
 
 //ADMIN pages
-router.get("/admin", function(req, res) {
-  res.render("admin");
+router.get("/admin", isAuthenticated, function(req, res) {
+  user.selectUserByEmail(req.user, function(user) {
+    if (user.is_admin === 1) {
+      res.render("admin");
+    } else {
+      res.send("Access Denied. Only Admin can access this Page!");
+    }
+  });
 });
 
 //admin page - get and display users from the db - OK
