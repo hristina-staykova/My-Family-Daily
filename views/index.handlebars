@@ -4,8 +4,19 @@
             <div class="navbar-brand has-icons-right">
                 <h1 class="title is-3 navbar-item">My Family Daily</h1>
                 <div class="navbar-item userBtn is-primary" user_id="{{user.user_id}}">Logged as: {{user.email}} </div>
-                <div class="buttons">
-                    <a class="control" href="/logout"><button class="button is-danger">Logout</button></a>
+                <div class="columns is-centered">
+                    {{#if user.is_admin}}
+                    <div class="column has-text-centered is-6">
+                        <div class="buttons">
+                            <a class="control" href="/admin"><button class="button is-link">Admin Page</button></a>
+                        </div>
+                    </div>
+                    {{/if}}
+                    <div class="column has-text-centered is-6">
+                        <div class="buttons">
+                            <a class="control" href="/logout"><button class="button is-danger">Logout</button></a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </nav>
