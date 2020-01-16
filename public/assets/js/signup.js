@@ -11,8 +11,6 @@ $(function() {
         .trim()
     };
 
-    console.log(newUser);
-
     // Does a post to the signup route. If successful, we are redirected to the members page
     // Otherwise we log any errors
 
@@ -20,11 +18,12 @@ $(function() {
       type: "POST",
       data: newUser
     })
-      .then(function() {
+      .done(function(res) {
+        console.log(res);
         window.location.replace("/index");
       })
-      .catch(function(err) {
-        console.log(err);
+      .fail(function(err) {
+        console.log(err.responseJSON.error);
       });
   });
 });

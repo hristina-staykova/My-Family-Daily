@@ -4,6 +4,7 @@ var comment = require("../models/comment.js");
 var user = require("../models/user.js");
 var news = require("../models/news.js");
 var passport = require("../config/passport.js");
+var bcrypt = require("bcryptjs");
 // Requiring our custom middleware for checking if a user is logged in
 var isAuthenticated = require("../config/middleware/isAuthenticated");
 
@@ -163,14 +164,17 @@ router.post("/api/login", passport.authenticate("local"), function(req, res) {
 router.post("/api/signup", function(req, res) {
   user.existingUser(req.body.email, function(result) {
     if (result[0] != undefined) {
-      console.log(result[0]);
-      res.render("signup", {
-        error: "This email is already taken, choose another one"
+      return res.status(400).json({
+        error: "Email already taken!"
       });
     } else {
-      user.insertUser(req.body.email, req.body.password, function(result) {
-        console.log("user is created");
-        res.json(req.user);
+      var password = bcrypt.hashSync(
+        req.body.password,
+        bcrypt.genSaltSync(10),
+        null
+      );
+      user.insertUser(req.body.email, password, function(result) {
+        res.status(200).json(result);
       });
     }
   });

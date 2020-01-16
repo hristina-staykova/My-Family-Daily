@@ -7,15 +7,20 @@ var comment = {
     });
   },
   selectNewsComments: function(news_id, cb) {
-    var condition = "news_id = " + news_id[0];
-    for (let index = 1; index < news_id.length; index++) {
-      condition += " OR news_id = ";
-      condition += news_id[index];
+    if (typeof news_id[0] !== "undefined") {
+      console.log(news_id[0]);
+      var condition = "news_id = " + news_id[0];
+      for (let index = 1; index < news_id.length; index++) {
+        condition += " OR news_id = ";
+        condition += news_id[index];
+      }
+      var queryString = `SELECT comments.*, users.email FROM comments
+        LEFT JOIN users ON users.user_id = comments.user_id
+        WHERE ${condition}`;
+    } else {
+      queryString = `SELECT comments.*, users.email FROM comments
+      LEFT JOIN users ON users.user_id = comments.user_id`;
     }
-    var queryString = `SELECT comments.*, users.email FROM comments
-    LEFT JOIN users ON users.user_id = comments.user_id
-    WHERE ${condition}`;
-
     orm.execute(queryString, function(res) {
       cb(res);
     });
