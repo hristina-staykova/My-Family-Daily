@@ -54,3 +54,7 @@ body {
 .btnUp {
   margin-bottom: 5px;
 }
+
+.is-one-quarter {
+  margin: auto;
+}

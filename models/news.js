@@ -14,6 +14,7 @@ var news = {
   },
   insertNews: function(cols, vals, cb) {
     vals[0] = "'" + vals[0] + "'";
+    console.log(vals);
     orm.insert("news", cols, vals, function(res) {
       cb(res);
     });

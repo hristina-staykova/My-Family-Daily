@@ -4,4 +4,11 @@ $(document).ready(function() {
   $.get("/user_data").then(function(data) {
     $(".userBtn").text(data.email);
   });
+
+  //change password
+  $("#changePasswordForm").on("submit", function(event) {
+    event.preventDefault();
+    var newPassword = $("#userPassword");
+    console.log(newPassword);
+  });
 });

@@ -2,6 +2,12 @@
 // here come all the functionalities on the page - listeners, ajax calls, etc.
 
 $(function() {
+  $(".addNewsContainer").hide();
+
+  $(".showAddNews").click(function() {
+    $(".addNewsContainer").toggle();
+  });
+
   $(".addNews").on("submit", function(event) {
     // Make sure to preventDefault on a submit event.
     event.preventDefault();
@@ -48,9 +54,7 @@ $(function() {
   });
 
   //the user can change its password
-  $(".changePswrd").on("click", function() {
-    $(".modal").addClass("is-active");
-  });
+  $(".settingsBtn").on("click", function() {});
 
   $(".changePasswordBtn").on("submit", function(event) {
     event.preventDefault();
@@ -64,9 +68,5 @@ $(function() {
         console.log("password saved");
       })
     );
-  });
-
-  $(".modal-close").on("click", function() {
-    $(".modal").removeClass("is-active");
   });
 });

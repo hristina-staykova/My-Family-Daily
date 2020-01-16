@@ -1,32 +1,10 @@
-<section class="hero is-small is-light">
-    <div class="hero-body">
-        <nav class="navbar" role="navigation">
-            <div class="navbar-brand">
-                <h1 class="navbar-item title">My Family Daily</h1>
-            </div>
-            <div class="navbar-end">
-                <div class="navbar-item userBtn" user_id="{{user.user_id}}">Logged as: {{user.email}}
-                </div>
-                {{#if user.is_admin}}
-                <a class="control navbar-item" href="/admin"><button class="button is-link">Admin
-                        Page</button>
-                </a>
-                {{/if}}
-                <a class="control navbar-item" href="/logout">
-                    <button class="button is-danger">Logout</button>
-                </a>
-            </div>
-        </nav>
-    </div>
-    </div>
-    </nav>
-    </div>
-</section>
-
 <section>
     <div class="container has-text-justified">
         <div class="columns">
             <div class="column is-three-quarters">
+                <p class="control has-text-centered">
+                    <button class="button showAddNews">Write post</button>
+                </p>
                 <article class="media addNewsContainer">
                     <figure class="media-left">
                         <p class="image is-64x64">
@@ -42,12 +20,11 @@
                             </div>
                             <div class="field">
                                 <p class="control">
-                                    <button class="button newsBtn" type="submit">Post it!</button>
+                                    <button class="button newsBtn" type="submit">Send</button>
                                 </p>
                             </div>
                         </form>
                     </div>
-
                 </article>
                 {{#each news }}
                 <article class="media news" news-id="{{news_id}}" user-id="{{user_id}}">
@@ -112,43 +89,23 @@
                 </article>
                 {{/each}}
             </div>
-            <div class="column">
+            <div class="column has-text-centered">
                 <div class="tile is-ancestor">
                     <div class="tile is-vertical is-parent">
                         <div class="tile is-child box time-box">
-                            <p>Current time in Berlin:</p>
+                            <p>Berlin</p>
                             <p id="time">........</p>
                         </div>
                         <div class="tile is-child box weather-box">
-                            <p>Current weather in Berlin:</p>
+                            <p>Berlin</p>
                             <p id="weather">........</p>
                         </div>
                         <div class="tile is-child box">
-                            <p class="button is-link">Invite your family!</p>
+                            <p class="button is-link is-inverted">Invite your family!</p>
                         </div>
-                        <div class="tile is-child box">
-                            <p class="button is-danger changePswrd">Change your password</p>
-                            <div class="modal">
-                                <div class="modal-background"></div>
-                                <div class="modal-content">
-                                    <form class="login">
-                                        <div class="field">
-                                            <p class="control">
-                                                <input class="input" type="password" name="password" required
-                                                    placeholder="Enter your new password here" id="userPassword">
-                                            </p>
-                                        </div>
-                                        <div class="field">
-                                            <p class="control">
-                                                <button class="button is-danger" type="submit" id="changePasswordBtn">
-                                                    Login
-                                                </button>
-                                            </p>
-                                        </div>
-                                    </form>
-                                </div>
-                                <button class="modal-close is-large" aria-label="close"></button>
-                            </div>
+                        <div class="tile is-child box" id="changePassword">
+                            <a class="button is-danger is-inverted changePasswordBtn" href="/settings">Change
+                                password</a>
                         </div>
                     </div>
                 </div>

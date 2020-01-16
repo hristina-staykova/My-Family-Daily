@@ -14,7 +14,7 @@ var isAuthenticated = require("../config/middleware/isAuthenticated");
 router.get("/admin", isAuthenticated, function(req, res) {
   user.selectUserByEmail(req.user, function(user) {
     if (user.is_admin === 1) {
-      res.render("admin");
+      res.render("admin", { user, isAdminPage: true });
     } else {
       res.send("Access Denied. Only Admin can access this Page!");
     }
@@ -202,10 +202,8 @@ router.get("/user_data", function(req, res) {
   }
 });
 
-//changing the password from the user
-router.post("/new-password", function(req, res) {
-  console.log(req.body);
-  console.log("getting password");
+router.get("/settings", isAuthenticated, function(req, res) {
+  res.render("settings");
 });
 
 // Export routes for server.js to use.
