@@ -202,11 +202,5 @@ router.get("/user_data", function(req, res) {
   }
 });
 
-//changing the password from the user
-router.post("/new-password", function(req, res) {
-  console.log(req.body);
-  console.log("getting password");
-});
-
 // Export routes for server.js to use.
 module.exports = router;
