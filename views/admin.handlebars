@@ -1,7 +1,3 @@
-<a class="control navbar-item" href="/index"><button class="button is-link">News
-        Page</button></a>
-<a class="control navbar-item" href="/logout"><button class="button is-danger">Logout</button></a>
-
 This is the <a href="/admin"><strong>admin</strong></a> page
 <p>This is the raw information from the DB</p>
 <ul>
@@ -15,14 +11,12 @@ This is the <a href="/admin"><strong>admin</strong></a> page
                 </button>
             </div>
             <div class="right">
-                user ID: {{user_id}}, email: {{email}},user password: {{user_password}}, admin: {{is_admin}}
+                user ID: {{user_id}}, email: {{email}}, admin: {{is_admin}}
             </div>
-
         </div>
     </li>
     {{/each}}
 </ul>
-
 <ul>
     Click to show all the <a href="/admin/news">"News"</a>
     {{#each allNews }}
@@ -52,7 +46,8 @@ This is the <a href="/admin"><strong>admin</strong></a> page
                 </button>
             </div>
             <div class="right">
-                Comment ID: {{comment_id}}, content: {{content}}, user_id: {{user_id}}, news_id: {{news_id}}, created
+                Comment ID: {{comment_id}}, content: {{content}}, user_id: {{user_id}}, news_id: {{news_id}},
+                created
                 on:
                 {{createdOn}}
             </div>

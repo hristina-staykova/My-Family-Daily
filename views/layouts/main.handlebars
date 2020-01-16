@@ -25,9 +25,14 @@
 					<div class="navbar-item userBtn" user_id="{{user.user_id}}">Logged as: {{user.email}}
 					</div>
 					{{#if user.is_admin}}
+					{{#if isAdminPage}}
+					<a class="control navbar-item" href="/index"><button class="button is-link">News
+							Page</button></a>
+					{{else}}
 					<a class="control navbar-item" href="/admin"><button class="button is-link">Admin
 							Page</button>
 					</a>
+					{{/if}}
 					{{/if}}
 					<a class="control navbar-item" href="/logout">
 						<button class="button is-danger">Logout</button>
